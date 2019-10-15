@@ -1,0 +1,79 @@
+HTTP/1.1 200 OK
+Cache-Control: private,no-store,no-cache,must-revalidate,proxy-revalidate
+Pragma: no-cache
+Content-Length: 882
+Content-Type: application/json; charset=utf-8
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Content-Type
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Max-Age: 1728000
+Date: Fri, 12 Dec 2014 01:27:09 GMT
+
+{
+  "APIResponse" : {
+    "ResponseCode" : 0,
+    "ResponseText" : "Success"
+  },
+  "TxnResp" : {
+    "Action" : "payment",
+    "Amount" : 19900,
+    "AmountOriginal" : 19800,
+    "AmountSurcharge" : 100,
+    "ThreeDSResponse" : null,
+    "AuthoriseId" : null,
+    "BankAccountDetails" : null,
+    "BankResponseCode" : "14",
+    "CVNResult" : {
+      "CVNResultCode" : "Unsupported"
+    },
+    "CardDetails" : null,
+    "CardType" : null,
+    "Currency" : "AUD",
+    "MerchantReference" : "test merchant ref",
+    "IsThreeDS" : false,
+    "IsCVNPresent" : true,
+    "MerchantNumber  " : "5353109000000000",
+    "OriginalTxnNumber" : null,
+    "ProcessedDateTime" : "2014-12-12T12:15:19.6370000",
+    "RRN" : "434612372626",
+    "ReceiptNumber" : "49316411177",
+    "Crn1" : "test crn1",
+    "Crn2" : "test crn2",
+    "Crn3" : "test crn3",
+    "ResponseCode" : "2",
+    "ResponseText" : "Invalid card number",
+    "BillerCode" : null,
+    "SettlementDate" : "20141212",
+    "Source" : "api",
+    "StoreCard" : false,
+    "IsTestTxn" : false,
+    "SubType" : "single",
+    "TxnNumber" : "1177",
+    "DVToken" : null,
+    "Type" : "internet",
+    "FraudScreeningResponse" : {
+        "ReDResponse" : {     
+            "FRAUD_REC_ID" : "123412341234SAX20150101100000000",
+            "FRAUD_RSP_CD" : "0100",
+            "FRAUD_STAT_CD" : "ACCEPT",
+            "ORD_ID" : "12341234",
+            "REQ_ID" : "123412341234",
+            "STAT_CD" : "PENDING"
+        },
+        "ResponseCode" : "",
+        "ResponseMessage" : "",
+        "TxnRejected" : false
+    },
+    "StatementDescriptor" : {
+      "AddressLine1" : "123 Drive Street",
+      "AddressLine2" : "",
+      "City" : "Melbourne",
+      "CompanyName" : "A Company Name",
+      "CountryCode" : "AUS",
+      "Postcode" : "3000",
+      "State" : "Victoria",
+      "MerchantName" : "A Merchant Name",
+      "PhoneNumber" : "0123456789"
+    }
+  }
+}

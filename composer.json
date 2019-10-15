@@ -1,0 +1,43 @@
+{
+    "name": "patronbase/omnipay-bpoint",
+    "type": "library",
+    "description": "BPOINT driver for the Omnipay payment processing library",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment",
+        "bpoint",
+        "commonwealth",
+        "bank",
+        "australia",
+        "CBA",
+        "redirect"
+    ],
+    "homepage": "https://github.com/PatronBase/omnipay-bpoint",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leith Caldwell",
+            "email": "leith@codedruids.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\BPOINT\\" : "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Omnipay\\BPOINT\\" : "tests/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}
