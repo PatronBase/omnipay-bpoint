@@ -22,5 +22,5 @@ script:
   - vendor/bin/phpunit --verbose --coverage-clover coverage.clover
 
 after_success:
-  - wget https://scrutinizer-ci.com/ocular.phar'
+  - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
