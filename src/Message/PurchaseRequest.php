@@ -208,11 +208,18 @@ class PurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         // submit data as request to Authkey endpoint
-        $httpRequest = $this->httpClient->createRequest('POST', $this->getEndpoint(), null);
-        $httpRequest->setBody(json_encode($data), 'application/json');
-        $httpResponse = $httpRequest->setHeader('Authorization', $this->getAuthHeader())->send();
+        $httpResponse = $this->httpClient->request(
+            'POST',
+            $this->getEndpoint(),
+            [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Authorization' => $this->getAuthHeader(),
+            ],
+            json_encode($data)
+        );
         // get response data
-        $responseData = $httpResponse->json();
+        $responseData = json_decode($httpResponse->getBody()->getContents(), true);
 
         return $this->response = new PurchaseResponse($this, $responseData);
     }

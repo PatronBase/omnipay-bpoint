@@ -62,7 +62,7 @@ class CompletePurchaseResponseTest extends TestCase
             'DVToken' => null,
             'Type' => 'internet',
             'FraudScreeningResponse' => array(
-                'ReDResponse' => array(     
+                'ReDResponse' => array(
                     'FRAUD_REC_ID' => '123412341234SAX20150101100000000',
                     'FRAUD_RSP_CD' => '0100',
                     'FRAUD_STAT_CD' => 'ACCEPT',

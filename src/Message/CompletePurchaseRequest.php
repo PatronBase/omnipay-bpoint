@@ -26,14 +26,13 @@ class CompletePurchaseRequest extends PurchaseRequest
         // if we have a valid API response and a result key, let's get more detail about the transaction
         if (isset($data['ResponseCode']) && $data['ResponseCode'] == 0 && isset($data['ResultKey'])) {
             // submit request with the returned result key
-            $httpRequest = $this->httpClient->createRequest(
+            $httpResponse = $this->httpClient->request(
                 'GET',
                 $this->getEndpoint()."/".$data['ResultKey'],
-                null
+                ['Authorization' => $this->getAuthHeader()]
             );
-            $httpResponse = $httpRequest->setHeader('Authorization', $this->getAuthHeader())->send();
             // get response data
-            $responseData = $httpResponse->json();
+            $responseData = json_decode($httpResponse->getBody()->getContents(), true);
             $data = array_merge($data, $responseData['TxnResp']);
         }
         return $this->response = new CompletePurchaseResponse($this, $data);
