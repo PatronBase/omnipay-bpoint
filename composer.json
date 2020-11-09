@@ -34,7 +34,8 @@
     },
     "require-dev": {
         "omnipay/tests": "~3.0",
-        "squizlabs/php_codesniffer": "^3.5"
+        "squizlabs/php_codesniffer": "^3.5",
+        "symfony/psr-http-message-bridge": "^2.0"
     },
     "extra": {
         "branch-alias": {

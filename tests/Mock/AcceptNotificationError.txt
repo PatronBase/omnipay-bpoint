@@ -1,0 +1,93 @@
+POST http://yourmerchantwebsite.com/txnWebHook HTTP/1.1
+Content-Type: application/json; charset=utf-8
+Host: merchant.com
+Content-Length: 827
+Expect: 100-continue
+Proxy-Connection: Keep-Alive
+
+{
+    "Action" : "payment",
+    "Amount" : 19900,
+    "AmountOriginal" : 19800,
+    "AmountSurcharge" : 100,
+    "AuthoriseId" : "",
+    "BankAccountDetails" : {
+        "AccountName" : "",
+        "AccountNumber" : "",
+        "BSBNumber" : "",
+        "TruncatedAccountNumber" : ""
+    },
+    "BankResponseCode" : "",
+    "BillerCode" : "",
+    "CardDetails" : {
+        "CardHolderName" : "John Smith",
+        "Category" : "",
+        "ExpiryDate" : "0521",
+        "Issuer" : "",
+        "IssuerCountryCode" : "",
+        "Localisation" : "",
+        "MaskedCardNumber" : "512345...346",
+        "SubType" : "extra comma here causes a malformed JSON error",
+    },
+    "CardType" : "",
+    "Crn1" : "Test reference 1",
+    "Crn2" : "",
+    "Crn3" : "",
+    "Currency" : "AUD",
+    "CVNResult" : {
+        "CVNResultCode" : ""
+    },
+    "DVToken" : "",
+    "EmailAddress" : "john.smith@email.com",
+    "FraudScreeningResponse" : {
+        "ReDResponse" : {
+            "FRAUD_REC_ID" : "",
+            "FRAUD_RSP_CD" : "",
+            "FRAUD_STAT_CD" : "",
+            "ORD_ID" : "",
+            "REQ_ID" : "",
+            "STAT_CD" : ""
+        },
+        "ResponseCode" : "",
+        "ResponseMessage" : "",
+        "TxnRejected" : false
+    },
+    "IsCVNPresent" : false,
+    "IsTestTxn" : false,
+    "IsThreeDS" : false,
+    "MerchantNumber" : "",
+    "MerchantReference" : "Test merchant reference",
+    "OriginalTxnNumber" : "",
+    "ProcessedDateTime" : "",
+    "ReceiptNumber" : "",
+    "ResponseCode" : "",
+    "ResponseText" : "",
+    "RRN" : "",
+    "SettlementDate" : "",
+    "Source" : "",
+    "StoreCard" : false,
+    "SubType" : "single",
+    "ThreeDSResponse" : {
+        "Eci" : "",
+        "Enrolled" : "",
+        "Status" : "",
+        "VerifySecurityLevel" : "",
+        "VerifyStatus" : "",
+        "VerifyToken" : "",
+        "VerifyType" : "",
+        "XID" : ""
+    },
+    "TxnNumber" : "",
+    "Type" : "internet",
+    "StatementDescriptor" : {
+      "AddressLine1" : "",
+      "AddressLine2" : "",
+      "City" : "",
+      "CompanyName" : "",
+      "CountryCode" : "",
+      "Postcode" : "",
+      "State" : "",
+      "MerchantName" : "",
+      "PhoneNumber" : ""
+    }
+}

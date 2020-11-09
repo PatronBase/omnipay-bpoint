@@ -5,6 +5,7 @@ namespace Omnipay\BPOINT;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\BPOINT\Message\CompletePurchaseRequest;
 use Omnipay\BPOINT\Message\PurchaseRequest;
+use Omnipay\BPOINT\Message\WebhookNotification;
 
 /**
  * BPOINT Redirect Gateway
@@ -77,5 +78,10 @@ class RedirectGateway extends AbstractGateway
     public function completePurchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\BPOINT\Message\CompletePurchaseRequest', $parameters);
+    }
+
+    public function acceptNotification()
+    {
+        return $this->createRequest('\Omnipay\BPOINT\Message\WebhookNotification', array());
     }
 }

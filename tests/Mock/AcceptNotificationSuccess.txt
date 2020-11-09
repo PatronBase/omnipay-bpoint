@@ -1,0 +1,71 @@
+POST http://yourmerchantwebsite.com/txnWebHook HTTP/1.1
+Content-Type: application/json; charset=utf-8
+Content-Length: 827
+Expect: 100-continue
+Proxy-Connection: Keep-Alive
+
+{
+    "Action" : "payment",
+    "Amount" : 19900,
+    "AmountOriginal" : 19800,
+    "AmountSurcharge" : 100,
+    "AuthoriseId" : "372626",
+    "BankAccountDetails" : null,
+    "BankResponseCode" : "00",
+    "BillerCode" : null,
+    "CardDetails" : {
+        "CardHolderName" : "John Smith",
+        "Category" : "STANDARD",
+        "ExpiryDate" : "0521",
+        "Issuer" : "BANCO DEL PICHINCHA, C.A.",
+        "IssuerCountryCode" : "ECU",
+        "Localisation" : "international",
+        "MaskedCardNumber" : "512345...346",
+        "SubType" : "credit"
+    },
+    "CardType" : "MC",
+    "Crn1" : "test crn1",
+    "Crn2" : "test crn2",
+    "Crn3" : "test crn3",
+    "Currency" : "AUD",
+    "CVNResult" : {
+        "CVNResultCode" : "M"
+    },
+    "DVToken" : null,
+    "EmailAddress" : null,
+    "FraudScreeningResponse" : {
+        "ReDResponse" : null,
+        "ResponseCode" : "",
+        "ResponseMessage" : "",
+        "TxnRejected" : false
+    },
+    "IsCVNPresent" : true,
+    "IsTestTxn" : true,
+    "IsThreeDS" : false,
+    "MerchantNumber" : "5353109000000000",
+    "MerchantReference" : "test merchant ref",
+    "OriginalTxnNumber" : null,
+    "ProcessedDateTime" : "2014-12-12T12:15:19.6370000",
+    "ReceiptNumber" : "49316411177",
+    "ResponseCode" : "0",
+    "ResponseText" : "Approved",
+    "RRN" : "434612372626",
+    "SettlementDate" : "20141212",
+    "Source" : "internet",
+    "StoreCard" : false,
+    "SubType" : "single",
+    "ThreeDSResponse" : null,
+    "TxnNumber" : "1177",
+    "Type" : "internet",
+    "StatementDescriptor" : {
+      "AddressLine1" : "123 Drive Street",
+      "AddressLine2" : "",
+      "City" : "Melbourne",
+      "CompanyName" : "A Company Name",
+      "CountryCode" : "AUS",
+      "Postcode" : "3000",
+      "State" : "Victoria",
+      "MerchantName" : "A Merchant Name",
+      "PhoneNumber" : "0123456789"
+    }
+}
