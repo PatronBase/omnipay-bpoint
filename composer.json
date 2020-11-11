@@ -35,11 +35,11 @@
     "require-dev": {
         "omnipay/tests": "~3.0",
         "squizlabs/php_codesniffer": "^3.5",
-        "symfony/psr-http-message-bridge": "^2.0"
+        "symfony/psr-http-message-bridge": "~1.1.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0.x-dev"
+            "dev-master": "3.1.x-dev"
         }
     },
     "prefer-stable": true

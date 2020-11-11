@@ -17,6 +17,13 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 class WebhookNotification extends AbstractRequest implements NotificationInterface, ResponseInterface
 {
     /**
+     * The data contained in the response.
+     *
+     * @var mixed
+     */
+    protected $data;
+
+    /**
      * @inheritDoc
      */
     public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest)
