@@ -12,7 +12,7 @@ class PurchaseResponseTest extends TestCase
     /**
      * Set up for the tests in this class
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->response = new PurchaseResponse($this->getMockRequest(), array(
             'APIResponse' => array(

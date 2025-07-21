@@ -2,7 +2,7 @@
 
 **BPOINT driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/PatronBase/omnipay-bpoint.png?branch=master)](https://travis-ci.org/PatronBase/omnipay-bpoint)
+[![Build Status](https://github.com/PatronBase/omnipay-bpoint/actions/workflows/phpunit.yml/badge.svg?branch=master)](https://github.com/PatronBase/omnipay-bpoint/actions)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/PatronBase/omnipay-bpoint.svg?style=flat)](https://scrutinizer-ci.com/g/PatronBase/omnipay-bpoint/code-structure)
 [![Code Quality](https://img.shields.io/scrutinizer/g/PatronBase/omnipay-bpoint.svg?style=flat)](https://scrutinizer-ci.com/g/PatronBase/omnipay-bpoint/?branch=master)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
@@ -11,8 +11,8 @@
 
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.6+. This package implements BPOINT support for Omnipay. It includes
-support for both redirect (3-party) and webservice (2-party) versions of the gateway.
+processing library for PHP 7.2+. This package implements BPOINT support for Omnipay. It includes
+support for only the redirect (3-party) version of the gateway.
 
 ## Installation
 

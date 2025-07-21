@@ -12,7 +12,7 @@ class PurchaseRequestTest extends TestCase
     /** @var mixed[]  Data to initialize the request with */
     private $options;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->request = new PurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->options = array(

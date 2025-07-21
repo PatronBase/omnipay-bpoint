@@ -30,17 +30,29 @@
         "psr-4": { "Omnipay\\BPOINT\\" : "tests/" }
     },
     "require": {
-        "omnipay/common": "~3.0"
+        "php": "^7.2|^8.0",
+        "omnipay/common": "^3.1"
     },
     "require-dev": {
-        "omnipay/tests": "~3.0",
+        "omnipay/tests": "^4.1",
         "squizlabs/php_codesniffer": "^3.5",
-        "symfony/psr-http-message-bridge": "~1.1.0"
+        "symfony/psr-http-message-bridge": "~1.1.0|^2.0",
+        "http-interop/http-factory-guzzle": "^1.1"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -p --standard=PSR2 src/",
+        "fix-style": "phpcbf -p --standard=PSR2 src/"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.1.x-dev"
+            "dev-master": "3.2.x-dev"
         }
     },
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
 }

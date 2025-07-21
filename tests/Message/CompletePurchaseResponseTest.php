@@ -12,7 +12,7 @@ class CompletePurchaseResponseTest extends TestCase
     /** @var mixed[]  Parsed TxnResp data from a transaction result */
     private $responseData;
 
-    public function setUp()
+    public function setUp(): void
     {
         // demo data from the BPOINT API documentation
         $this->responseData = array(
