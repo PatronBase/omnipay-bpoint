@@ -27,7 +27,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function getTransactionReference()
     {
-        return isset($this->data['AuthoriseId']) ? $this->data['AuthoriseId'] : null;
+        return $this->data['AuthoriseId'] ?? null;
     }
 
     /**
@@ -37,7 +37,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function getMessage()
     {
-        return isset($this->data['ResponseText']) ? $this->data['ResponseText'] : null;
+        return $this->data['ResponseText'] ?? null;
     }
 
     /**
@@ -47,6 +47,16 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function getCardType()
     {
-        return isset($this->data['CardType']) ? $this->data['CardType'] : null;
+        return $this->data['CardType'] ?? null;
+    }
+
+    /**
+     * Get the card reference (payment token) if available
+     *
+     * @return null|string
+     */
+    public function getCardReference()
+    {
+        return $this->data['DVToken'] ?? null;
     }
 }

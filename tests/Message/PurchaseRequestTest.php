@@ -22,10 +22,11 @@ class PurchaseRequestTest extends TestCase
             'password' => 'DemoPassword!',
             'merchantNumber' => '5353109000000000',
             'merchantShortName' => 'DEMO123',
+            'billerCode' => '1234567',
             'customerReferenceNumber1' => 'cr1',
             'customerReferenceNumber2' => 'cr2',
             'customerReferenceNumber3' => 'cr3',
-            'generateToken' => false,
+            'createToken' => false,
             'customerNumber' => 'cust456',
             'notifyUrl' => 'https://www.example.com/notify',
             'returnUrl' => 'https://www.example.com/return',
@@ -39,9 +40,16 @@ class PurchaseRequestTest extends TestCase
     {
         $data = $this->request->getData();
 
+        $this->assertArrayHasKey('HppParameters', $data);
+        $this->assertFalse($data['HppParameters']['HideBillerCode']);
+        $this->assertFalse($data['HppParameters']['HideCrn1']);
+        $this->assertFalse($data['HppParameters']['HideCrn2']);
+        $this->assertFalse($data['HppParameters']['HideCrn3']);
+
         $this->assertSame('payment', $data['ProcessTxnData']['Action']);
         $this->assertTrue($data['ProcessTxnData']['TestMode']);
         $this->assertSame(145, $data['ProcessTxnData']['Amount']);
+        $this->assertSame('1234567', $data['ProcessTxnData']['BillerCode']);
         $this->assertSame('cr1', $data['ProcessTxnData']['Crn1']);
         $this->assertSame('cr2', $data['ProcessTxnData']['Crn2']);
         $this->assertSame('cr3', $data['ProcessTxnData']['Crn3']);
@@ -54,13 +62,90 @@ class PurchaseRequestTest extends TestCase
         $this->assertSame('https://www.example.com/notify', $data['WebHookUrl']);
     }
 
+    public function testHideFlags()
+    {
+        $this->options = array_merge($this->options, array(
+            'hideBillerCode' => true,
+            'hideCustomerReferenceNumber1' => true,
+            'hideCustomerReferenceNumber2' => true,
+            'hideCustomerReferenceNumber3' => true,
+        ));
+        $this->request->initialize($this->options);
+
+        $data = $this->request->getData();
+
+        $this->assertArrayHasKey('HppParameters', $data);
+        $this->assertTrue($data['HppParameters']['HideBillerCode']);
+        $this->assertTrue($data['HppParameters']['HideCrn1']);
+        $this->assertTrue($data['HppParameters']['HideCrn2']);
+        $this->assertTrue($data['HppParameters']['HideCrn3']);
+    }
+
+    public function testCancelUrl()
+    {
+        $this->options = array_merge($this->options, array('cancelUrl' => 'https://www.example.com/cancel'));
+        $this->request->initialize($this->options);
+
+        $data = $this->request->getData();
+
+        $this->assertArrayHasKey('HppParameters', $data);
+        $this->assertArrayHasKey('ReturnBarLabel', $data['HppParameters']);
+        $this->assertSame('Cancel', $data['HppParameters']['ReturnBarLabel']);
+        $this->assertArrayHasKey('ReturnBarUrl', $data['HppParameters']);
+        $this->assertSame('https://www.example.com/cancel', $data['HppParameters']['ReturnBarUrl']);
+    }
+
+    public function testCardReference()
+    {
+        $this->options = array_merge($this->options, array('cardReference' => '1234567890123456'));
+        $this->request->initialize($this->options);
+
+        $data = $this->request->getData();
+
+        $this->assertArrayHasKey('ProcessTxnData', $data);
+        $this->assertArrayHasKey('DVTokenData', $data['ProcessTxnData']);
+        $this->assertArrayHasKey('DVToken', $data['ProcessTxnData']['DVTokenData']);
+        $this->assertSame('1234567890123456', $data['ProcessTxnData']['DVTokenData']['DVToken']);
+        $this->assertArrayHasKey('UpdateDVTokenExpiryDate', $data['ProcessTxnData']['DVTokenData']);
+        $this->assertFalse($data['ProcessTxnData']['DVTokenData']['UpdateDVTokenExpiryDate']);
+    }
+
+    public function testToken()
+    {
+        $this->options = array_merge($this->options, array('token' => '1234567890123456'));
+        $this->request->initialize($this->options);
+
+        $data = $this->request->getData();
+
+        $this->assertArrayHasKey('ProcessTxnData', $data);
+        $this->assertArrayHasKey('DVTokenData', $data['ProcessTxnData']);
+        $this->assertArrayHasKey('DVToken', $data['ProcessTxnData']['DVTokenData']);
+        $this->assertSame('1234567890123456', $data['ProcessTxnData']['DVTokenData']['DVToken']);
+        $this->assertArrayHasKey('UpdateDVTokenExpiryDate', $data['ProcessTxnData']['DVTokenData']);
+        $this->assertFalse($data['ProcessTxnData']['DVTokenData']['UpdateDVTokenExpiryDate']);
+    }
+
     public function testGetDataOnlyGetToken()
+    {
+        // override some data
+        $this->options = array_merge($this->options, array('createToken' => true, 'amount' => '0.00'));
+        $this->request->initialize($this->options);
+        $this->assertTrue($this->request->getCreateToken());
+        
+        $data = $this->request->getData();
+        $this->assertSame('verify_only', $data['ProcessTxnData']['Action']);
+        $this->assertSame(0, $data['ProcessTxnData']['Amount']);
+        $this->assertSame(3, $data['ProcessTxnData']['TokenisationMode']);
+    }
+
+    public function testGetDataDeprecatedGetToken()
     {
         // override some data
         $this->options = array_merge($this->options, array('generateToken' => true, 'amount' => '0.00'));
         $this->request->initialize($this->options);
+        $this->assertTrue($this->request->getGenerateToken());
+        
         $data = $this->request->getData();
-
         $this->assertSame('verify_only', $data['ProcessTxnData']['Action']);
         $this->assertSame(0, $data['ProcessTxnData']['Amount']);
         $this->assertSame(3, $data['ProcessTxnData']['TokenisationMode']);
