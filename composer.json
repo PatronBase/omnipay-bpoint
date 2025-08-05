@@ -34,10 +34,10 @@
         "omnipay/common": "^3.1"
     },
     "require-dev": {
-        "omnipay/tests": "^4.1",
+        "omnipay/tests": "^4.2",
         "squizlabs/php_codesniffer": "^3.5",
-        "symfony/psr-http-message-bridge": "~1.1.0|^2.0",
-        "http-interop/http-factory-guzzle": "^1.1"
+        "symfony/psr-http-message-bridge": "~1.1.1|^2.0",
+        "guzzlehttp/psr7": "^2.0"
     },
     "scripts": {
         "test": "phpunit",
