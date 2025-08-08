@@ -168,6 +168,12 @@ class PurchaseRequest extends AbstractRequest
             'RedirectionUrl' => $this->getReturnUrl(),
             'WebHookUrl' => $this->getNotifyUrl(),
         );
+        if ($this->getCancelUrl()) {
+            $data['HppParameters'] = array(
+                'ReturnBarLabel' => 'Cancel',
+                'ReturnBarUrl' => $this->getCancelUrl(),
+            );
+        }
         // add item details if available
         $items = $this->getItems();
         if ($items) {

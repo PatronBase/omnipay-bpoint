@@ -54,6 +54,20 @@ class PurchaseRequestTest extends TestCase
         $this->assertSame('https://www.example.com/notify', $data['WebHookUrl']);
     }
 
+    public function testCancelUrl()
+    {
+        $this->options = array_merge($this->options, array('cancelUrl' => 'https://www.example.com/cancel'));
+        $this->request->initialize($this->options);
+
+        $data = $this->request->getData();
+
+        $this->assertArrayHasKey('HppParameters', $data);
+        $this->assertArrayHasKey('ReturnBarLabel', $data['HppParameters']);
+        $this->assertSame('Cancel', $data['HppParameters']['ReturnBarLabel']);
+        $this->assertArrayHasKey('ReturnBarUrl', $data['HppParameters']);
+        $this->assertSame('https://www.example.com/cancel', $data['HppParameters']['ReturnBarUrl']);
+    }
+
     public function testCardReference()
     {
         $this->options = array_merge($this->options, array('cardReference' => '1234567890123456'));
