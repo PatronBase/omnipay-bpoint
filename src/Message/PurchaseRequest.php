@@ -45,6 +45,16 @@ class PurchaseRequest extends AbstractRequest
         return $this->setParameter('merchantNumber', $value);
     }
 
+    public function getCreateToken()
+    {
+        return $this->getParameter('createToken');
+    }
+
+    public function setCreateToken($value)
+    {
+        return $this->setParameter('createToken', $value);
+    }
+
     public function getMerchantShortName()
     {
         return $this->getParameter('merchantShortName');
@@ -100,19 +110,24 @@ class PurchaseRequest extends AbstractRequest
         return $this->setParameter('customerReferenceNumber3', $value);
     }
 
+    /**
+     * @deprecated  Alias. Use standard `getCreateToken()` instead.
+     */
     public function getGenerateToken()
     {
-        return $this->getParameter('generateToken');
+        return $this->getCreateToken();
     }
 
     /**
      * Indicate whether or not to generate a token for the card used in the transaction
      *
+     * @deprecated  Alias. Use standard `setCreateToken()` instead.
+     *
      * @param bool $value  Generate a token or not
      */
     public function setGenerateToken($value)
     {
-        return $this->setParameter('generateToken', $value);
+        return $this->setCreateToken($value);
     }
 
     public function getCustomerNumber()
@@ -145,7 +160,7 @@ class PurchaseRequest extends AbstractRequest
                 'Crn3' => $this->getCustomerReferenceNumber3(),
                 'Currency' => $this->getCurrency(),
                 // 1 - no; 3 - always (don't leave it up to system or customer)
-                'TokenisationMode' => $this->getGenerateToken() ? 3 : 1,
+                'TokenisationMode' => $this->getCreateToken() ? 3 : 1,
                 'MerchantReference' => $this->getTransactionId(),
                 'SubType' => 'single',
                 'Type' => 'internet',
@@ -153,6 +168,12 @@ class PurchaseRequest extends AbstractRequest
             'RedirectionUrl' => $this->getReturnUrl(),
             'WebHookUrl' => $this->getNotifyUrl(),
         );
+        if ($this->getCancelUrl()) {
+            $data['HppParameters'] = array(
+                'ReturnBarLabel' => 'Cancel',
+                'ReturnBarUrl' => $this->getCancelUrl(),
+            );
+        }
         // add item details if available
         $items = $this->getItems();
         if ($items) {
@@ -200,6 +221,14 @@ class PurchaseRequest extends AbstractRequest
             if ($customerNumber) {
                 $data['Customer']['CustomerNumber'] = $customerNumber;
             }
+        }
+
+        // add stored card token if available
+        if ($this->getToken() || $this->getCardReference()) {
+            $data['ProcessTxnData']['DVTokenData'] = array(
+                'DVToken' => $this->getToken() ?? $this->getCardReference(),
+                'UpdateDVTokenExpiryDate' => false,
+            );
         }
 
         return $data;

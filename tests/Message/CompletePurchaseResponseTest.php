@@ -104,6 +104,7 @@ class CompletePurchaseResponseTest extends TestCase
         $this->assertSame('Approved', $this->response->getMessage());
         $this->assertSame('372626', $this->response->getTransactionReference());
         $this->assertSame('MC', $this->response->getCardType());
+        $this->assertNull($this->response->getCardReference());
 
         // confirm the request format was valid
         $requestData = $this->response->getRequest()->getData();
@@ -138,6 +139,7 @@ class CompletePurchaseResponseTest extends TestCase
         $this->assertSame('Invalid card number', $this->response->getMessage());
         $this->assertNull($this->response->getTransactionReference());
         $this->assertNull($this->response->getCardType());
+        $this->assertNull($this->response->getCardReference());
 
         // confirm the request format was valid
         $requestData = $this->response->getRequest()->getData();
@@ -165,9 +167,22 @@ class CompletePurchaseResponseTest extends TestCase
         $this->assertSame('Invalid credentials', $this->response->getMessage());
         $this->assertNull($this->response->getTransactionReference());
         $this->assertNull($this->response->getCardType());
+        $this->assertNull($this->response->getCardReference());
 
         $data = $this->response->getData();
 
         $this->assertSame(1, $data['ResponseCode']);
+    }
+
+    public function testCompletePurchaseReturnsCardReference()
+    {
+        // adjust to have a token
+        $this->responseData['DVToken'] = '1234567890123456';
+
+        $this->response = new CompletePurchaseResponse($this->getMockRequest(), $this->responseData);
+
+        $this->assertTrue($this->response->isSuccessful());
+        $this->assertFalse($this->response->isRedirect());
+        $this->assertSame('1234567890123456', $this->response->getCardReference());
     }
 }

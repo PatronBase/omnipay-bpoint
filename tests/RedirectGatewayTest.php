@@ -32,7 +32,7 @@ class RedirectGatewayTest extends GatewayTestCase
             'customerReferenceNumber1' => 'cr1',
             'customerReferenceNumber2' => 'cr2',
             'customerReferenceNumber3' => 'cr3',
-            'generateToken' => true,
+            'createToken' => true,
             'customerNumber' => 'cust456',
             'notifyUrl' => 'https://www.example.com/notify',
             'returnUrl' => 'https://www.example.com/return',
